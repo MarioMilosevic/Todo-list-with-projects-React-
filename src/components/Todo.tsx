@@ -1,13 +1,41 @@
 import { FaEdit } from "react-icons/fa";
 import { FaCalendarAlt } from "react-icons/fa";
-const Todo = () => {
-  return (
-    <div className="border border-black w-[80%] p-4 mt-4 flex">
-     <FaEdit />
-    <h2>Title:Ovo je naslov todoa</h2>
-    <FaCalendarAlt />
-    </div>
-  )
+import Button from "./Button";
+interface TodoTypes {
+    title:string
 }
+const Todo = ({ title }:TodoTypes) => {
+  return (
+    <div className="w-[80%] mt-4 p-4 flex justify-between text-xl rounded-lg items-center border border-neutral-500">
+      <div className="items-center flex gap-4">
+        <FaEdit />
+        <p>Title:{title}</p>
+      </div>
 
-export default Todo
+      <div className="flex px-4 w-[70%] justify-between items-center">
+        <FaCalendarAlt />
+        <p>Due Date: 2022-12-12</p>
+
+        <div className="flex gap-4">
+          <Button hoverColor="bg-green-600" color="bg-green-500">
+            Edit
+          </Button>
+          <Button hoverColor="bg-red-600" color="bg-red-500">
+            Delete
+          </Button>
+        </div>
+
+        <div className="flex items-center justify-end">
+          <input
+            id="checked-checkbox"
+            type="checkbox"
+            value=""
+            className="w-4 h-4 text-blue-600 bg-neutral-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Todo;
