@@ -1,6 +1,6 @@
 import { FaFolderPlus } from "react-icons/fa";
 
-const Projects = () => {
+const AddProject = () => {
   return (
     <div className="bg-neutral-500 p-4">
       <h2 className="pt-8 text-center text-4xl font-semibold">Projects</h2>
@@ -12,4 +12,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default AddProject;
