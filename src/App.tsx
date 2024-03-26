@@ -11,7 +11,6 @@ function App() {
       <div className="flex flex-1 h-full border border-black">
         {isEditing && <ProjectForm/>}
         {!isEditing && <Projects/>}
-        <button onClick={()=> setIsEditing(!isEditing)}>Click me</button>
       <Todos/>
       </div>
     </>
