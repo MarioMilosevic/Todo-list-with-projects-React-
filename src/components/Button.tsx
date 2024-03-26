@@ -7,7 +7,7 @@ interface ButtonType {
 
 const Button = ({ children, color, hoverColor }: ButtonType) => {
   return (
-    <button className={`px-6 py-3 rounded-full ${color} ${hoverColor}`}>{children}</button>
+    <button className={`px-4 py-2 w-full text-xl rounded-full ${color} ${hoverColor}`}>{children}</button>
   );
 };
 
