@@ -7,7 +7,7 @@ interface ProjectType {
 const Project = ({title}:ProjectType) => {
   return (
     <div className="bg-neutral-500 flex flex-col px-4 py-3 ">
-      <div className="flex border w-[80%] px-3 py-1 rounded-lg mx-auto justify-between items-center text-2xl">
+      <div className="flex border w-[80%] px-3 py-1 cursor-pointer rounded-lg mx-auto justify-between items-center text-2xl">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
