@@ -17,10 +17,10 @@ const Todo = ({ title }:TodoTypes) => {
         <p>Due Date: 2022-12-12</p>
 
         <div className="flex gap-4">
-          <Button hoverColor="bg-green-600" color="bg-green-500">
+          <Button handleClick={() => console.log("nesto")} hoverColor="bg-green-600" color="bg-green-500">
             Edit
           </Button>
-          <Button hoverColor="bg-red-600" color="bg-red-500">
+          <Button handleClick={() => console.log("nesto")} hoverColor="bg-red-600" color="bg-red-500">
             Delete
           </Button>
         </div>
