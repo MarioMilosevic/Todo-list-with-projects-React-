@@ -1,10 +1,10 @@
 import { MdDeleteForever } from "react-icons/md";
 
-interface ProjectsType {
+interface ProjectType {
     title:string;
 }
 
-const Projects = ({title}:ProjectsType) => {
+const Project = ({title}:ProjectType) => {
   return (
     <div className="bg-neutral-500 flex flex-col px-4 py-3 ">
       <div className="flex border w-[80%] px-3 py-1 rounded-lg mx-auto justify-between items-center text-2xl">
@@ -29,4 +29,4 @@ const Projects = ({title}:ProjectsType) => {
   );
 };
 
-export default Projects;
+export default Project;
