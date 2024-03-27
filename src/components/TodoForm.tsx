@@ -13,6 +13,11 @@ const TodoForm = ({ toggleIsTodoEditing, addTodo }: TodoFormTypes) => {
     date: "",
   });
 
+  const handleAddTodo = () => {
+    toggleIsTodoEditing()
+    addTodo(todoForm)
+    console.log('radi')
+  }
 
   return (
     <>
@@ -43,7 +48,7 @@ const TodoForm = ({ toggleIsTodoEditing, addTodo }: TodoFormTypes) => {
           <Button
             hoverColor="hover:bg-green-600"
             color="bg-green-500"
-            handleClick={() => addTodo(todoForm)}
+            handleClick={() => handleAddTodo()}
           >
             Add
           </Button>

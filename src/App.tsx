@@ -24,6 +24,7 @@ function App() {
 
   const addTodo = (newTodo: string) => {
     setGlobalTodos((prev) => [...prev, newTodo]);
+    setIsTodoEditing(false)
   };
 
   const deleteProject = (e, id: string) => {
@@ -49,12 +50,13 @@ function App() {
   };
 
   const toggleIsTodoFinished = (id: string) => {
-  setGlobalTodos(prev => {
-    const updatedTodos = prev.map(todo => todo.id === id ? {...todo, isFinished:!todo.isFinished} : todo)
-    return updatedTodos
-  })
-}
-
+    setGlobalTodos((prev) => {
+      const updatedTodos = prev.map((todo) =>
+        todo.id === id ? { ...todo, isFinished: !todo.isFinished } : todo
+      );
+      return updatedTodos;
+    });
+  };
 
   return (
     <>
