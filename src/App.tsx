@@ -6,14 +6,15 @@ import Project from "./components/Project";
 import AddTodo from "./components/AddTodo";
 import Footer from "./components/Footer";
 import TodoForm from "./components/TodoForm";
-
+import { projectState } from "./initialState";
 import { useState } from "react";
 
 function App() {
   const [isProjectEditing, setIsProjectEditing] = useState(false);
   const [projects, setProjects] = useState([]);
   const [isTodoEditing, setIsTodoEditing] = useState(false);
-  const [globalTodos, setGlobalTodos] = useState([]);
+  // const [globalTodos, setGlobalTodos] = useState([]);
+  const [activeProject, setActiveProject] = useState(projectState);
 
   const toggleIsProjectEditing = () => {
     setIsProjectEditing((prev) => !prev);
@@ -23,9 +24,31 @@ function App() {
     setProjects((prev) => [...prev, newProject]);
   };
 
+  // const addTodo = (newTodo: string) => {
+  //   // setGlobalTodos((prev) => [...prev, newTodo]);
+  //   // setActiveProject((prev) => ({
+  //   //   ...prev,
+  //   //   todos: [...prev.todos, newTodo],
+  //   // }));
+  //   setProjects(prev => ())
+  //   setIsTodoEditing(false);
+  //   console.log('add todo')
+  //   console.log(activeProject)
+  //   // TREBA TESTIRATI
+  // };
+
   const addTodo = (newTodo: string) => {
-    setGlobalTodos((prev) => [...prev, newTodo]);
-    setIsTodoEditing(false)
+    setProjects((prev) =>
+      prev.map((project) =>
+        project.isClicked
+          ? { ...project, todos: [...project.todos, newTodo] }
+          : project
+      )
+    );
+    setIsTodoEditing(false);
+    console.log("add todo");
+    console.log(activeProject);
+    console.log(projects)
   };
 
   const deleteProject = (e, id: string) => {
@@ -40,6 +63,12 @@ function App() {
       isClicked: project.id === id,
     }));
     setProjects(updatedProjects);
+    const selectedProject = updatedProjects.find(
+      (project) => project.id === id
+    );
+    setActiveProject(selectedProject);
+    console.log(projects);
+    console.log(activeProject);
   };
 
   const updateTodos = () => {
@@ -51,12 +80,19 @@ function App() {
   };
 
   const toggleIsTodoFinished = (id: string) => {
-    setGlobalTodos((prev) => {
-      const updatedTodos = prev.map((todo) =>
+    // setGlobalTodos((prev) => {
+    //   const updatedTodos = prev.map((todo) =>
+    //     todo.id === id ? { ...todo, isFinished: !todo.isFinished } : todo
+    //   );
+    //   return updatedTodos;
+    // });
+    setActiveProject((prev) => ({
+      ...prev,
+      todos: prev.todos.map((todo) =>
         todo.id === id ? { ...todo, isFinished: !todo.isFinished } : todo
-      );
-      return updatedTodos;
-    });
+      ),
+    }));
+    // TREBA TESTIRATI
   };
 
   return (
@@ -97,7 +133,7 @@ function App() {
           ) : (
             <AddTodo toggleIsTodoEditing={toggleIsTodoEditing} />
           )}
-          {globalTodos.map((todo) => (
+          {activeProject.todos.map((todo) => (
             <Todo
               key={todo.id}
               toggleIsTodoFinished={toggleIsTodoFinished}

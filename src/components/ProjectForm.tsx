@@ -1,5 +1,5 @@
 import Button from "./Button";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { projectState } from "../initialState";
 
 interface ProjectFormTypes {
@@ -16,18 +16,25 @@ const ProjectForm = ({
 }: ProjectFormTypes) => {
   const [project, setProject] = useState(projectState);
 
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (project.title) {
       addProject(project);
       toggleIsProjectEditing();
-      setProject({ title: "", id: "", isClicked: false });
+      setProject(projectState);
     }
   };
 
   return (
     <form className="bg-neutral-500 p-4 mb-1">
       <input
+        ref={inputRef}
         value={project.title}
         onChange={(e) =>
           setProject((prev) => ({

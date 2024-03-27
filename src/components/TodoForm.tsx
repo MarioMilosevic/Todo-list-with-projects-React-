@@ -8,7 +8,16 @@ interface TodoFormTypes {
 }
 
 const TodoForm = ({ toggleIsTodoEditing, addTodo }: TodoFormTypes) => {
+  // export const todoState: TodoFormState = {
+  //   title: "",
+  //   id: "",
+  //   isFinished: false,
+  //   date: "",
+  // };
   const [todoForm, setForm] = useState(todoState);
+  // proslijediti objekat sa toduovima ili samo tudue od objekta
+  // proslijediti funkciju koja ce da apdejtuje taj arrej objekta
+  // i na kraju reci da renderuje samo one tudue on selektovanog projekta 
 
   const handleAddTodo = () => {
     toggleIsTodoEditing()

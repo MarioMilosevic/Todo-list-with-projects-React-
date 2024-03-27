@@ -2,6 +2,7 @@ export type ProjectState = {
     title: string;
     id: string;
     isClicked: boolean;
+    todos:TodoFormState[]
 };
 
 export type TodoFormState = {

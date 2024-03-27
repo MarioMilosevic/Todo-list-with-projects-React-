@@ -5,6 +5,7 @@ interface TodoTypes {
     title:string;
     date:string;
     isFinished:boolean;
+    id:string;
     toggleIsTodoFinished:(id:string) => void;
 }
 const Todo = ({ title, date,id, isFinished, toggleIsTodoFinished }:TodoTypes) => {

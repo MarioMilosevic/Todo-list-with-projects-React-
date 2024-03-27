@@ -5,6 +5,7 @@ export const projectState: ProjectState = {
   title: "",
   id: "",
   isClicked: false,
+  todos:[]
 };
 
 export const todoState: TodoFormState = {
