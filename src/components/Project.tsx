@@ -17,10 +17,9 @@ const Project = ({
   isClicked,
   isSelected,
   deleteProject,
-  updateProject
+  updateProject,
 }: ProjectType) => {
-
-  const [todos,setTodos] = useState([])
+  const [todos, setTodos] = useState([]);
 
   const projectClass = isClicked ? "bg-neutral-300" : "bg-neutral-500";
   return (
