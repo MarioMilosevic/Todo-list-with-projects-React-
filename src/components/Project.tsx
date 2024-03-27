@@ -3,17 +3,25 @@ import { MdDeleteForever } from "react-icons/md";
 interface ProjectType {
   title: string;
   id: string;
-  isSelected: (name: string) => void;
+  isClicked: boolean;
+  isSelected: (id: string) => void;
+  deleteProject: (id: string) => void;
 }
 
-const Project = ({ title, id, isClicked,isSelected }: ProjectType) => {
-  const baseClass = "bg-neutral-500"
-  const selectedClass = "bg-neutral-300"
-  const mario = isClicked ? selectedClass : baseClass
+const Project = ({
+  title,
+  id,
+  isClicked,
+  isSelected,
+  deleteProject,
+}: ProjectType) => {
+  const baseClass = "bg-neutral-500";
+  const selectedClass = "bg-neutral-300";
+  const projectClass = isClicked ? selectedClass : baseClass;
   return (
     <div className="bg-neutral-500 flex flex-col px-4 py-3">
       <div
-        className={`${mario} flex border w-[80%] px-3 py-2 cursor-pointer rounded-lg mx-auto justify-between items-center text-2xl`}
+        className={`${projectClass} flex border w-[80%] px-3 py-2 cursor-pointer rounded-lg mx-auto justify-between items-center text-2xl`}
         onClick={() => isSelected(id)}
       >
         <svg
@@ -31,7 +39,7 @@ const Project = ({ title, id, isClicked,isSelected }: ProjectType) => {
           />
         </svg>
         <h2>{title}</h2>
-        <MdDeleteForever />
+        <MdDeleteForever onClick={() => deleteProject(id)} />
       </div>
     </div>
   );

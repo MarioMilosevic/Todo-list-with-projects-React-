@@ -12,7 +12,7 @@ const ProjectForm = ({
   toggleIsProjectEditing,
   addProject,
 }: ProjectFormTypes) => {
-  
+
   const [project, setProject] = useState({
     title: "",
     id: "",
@@ -26,7 +26,7 @@ const ProjectForm = ({
   };
 
   return (
-    <form className="bg-neutral-500 p-4">
+    <form className="bg-neutral-500 p-4 mb-1">
       <input
         value={project.title}
         onChange={(e) =>

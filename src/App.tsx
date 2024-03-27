@@ -7,8 +7,7 @@ import AddTodo from "./components/AddTodo";
 import Footer from "./components/Footer";
 import TodoForm from "./components/TodoForm";
 import { useState } from "react";
-// da selektujem projekat, on dobije klasu, ostali ne dobiju klasu
-// njemu stavim da je selektovan njima da nisu, znaci kliknuti da ostali ne
+
 function App() {
   const [isProjectEditing, setIsProjectEditing] = useState(false);
   const [projects, setProjects] = useState([]);
@@ -23,12 +22,18 @@ function App() {
     setProjects((prev) => [...prev, newProject]);
   };
 
+  const deleteProject = (id: string) => {  
+    const filteredProjects = projects.filter(project => project.id !== id)
+    setProjects(filteredProjects);
+  };
+
   const isSelected = (id: string) => {
-    const updatedProjects = projects.map(project => ({
-      ...project, 
-      isClicked:project.id === id
-    }))
-    setProjects(updatedProjects)
+    const updatedProjects = projects.map((project) => ({
+      ...project,
+      isClicked: project.id === id,
+    }));
+    console.log("selekted")
+    setProjects(updatedProjects);
   };
 
   return (
@@ -44,18 +49,18 @@ function App() {
           ) : (
             <AddProject toggleIsProjectEditing={toggleIsProjectEditing} />
           )}
-          {projects.map((project: { id: string; title: string, isClicked:boolean }) => {
-            return (
-              <Project
-                key={project.id}
-                {...project}
-                // id={project.id}
-                // title={project.title}
-                // isClicked={project.isClicked}
-                isSelected={isSelected}
-              />
-            );
-          })}
+          {projects.map(
+            (project: { id: string; title: string; isClicked: boolean }) => {
+              return (
+                <Project
+                  key={project.id}
+                  {...project}
+                  isSelected={isSelected}
+                  deleteProject={deleteProject}
+                />
+              );
+            }
+          )}
         </div>
         <div className="bg-neutral-300 w-[80%] pl-60 pt-12 border border-black">
           <h2 className="text-4xl pl-6 font-semibold">Todos</h2>
