@@ -21,8 +21,11 @@ const ProjectForm = ({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    addProject(project);
-    setProject({ title: "", id: "", isClicked: false });
+    if(project.title){
+      addProject(project);
+      toggleIsProjectEditing()
+      setProject({ title: "", id: "", isClicked: false });
+    }
   };
 
   return (

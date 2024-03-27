@@ -7,7 +7,7 @@ import AddTodo from "./components/AddTodo";
 import Footer from "./components/Footer";
 import TodoForm from "./components/TodoForm";
 import { useState } from "react";
-// da
+
 function App() {
   const [isProjectEditing, setIsProjectEditing] = useState(false);
   const [projects, setProjects] = useState([]);
@@ -20,6 +20,10 @@ function App() {
 
   const addProject = (newProject: string) => {
     setProjects((prev) => [...prev, newProject]);
+  };
+
+  const addTodo = (newTodo: string) => {
+    setGlobalTodos((prev) => [...prev, newTodo]);
   };
 
   const deleteProject = (e, id: string) => {
@@ -43,6 +47,14 @@ function App() {
   const toggleIsTodoEditing = () => {
     setIsTodoEditing((prev) => !prev);
   };
+
+  const toggleIsTodoFinished = (id: string) => {
+  setGlobalTodos(prev => {
+    const updatedTodos = prev.map(todo => todo.id === id ? {...todo, isFinished:!todo.isFinished} : todo)
+    return updatedTodos
+  })
+}
+
 
   return (
     <>
@@ -75,12 +87,19 @@ function App() {
         <div className="bg-neutral-300 w-[80%] pl-60 pt-12 border border-black">
           <h2 className="text-4xl pl-6 font-semibold">Todos</h2>
           {isTodoEditing ? (
-            <TodoForm toggleIsTodoEditing={toggleIsTodoEditing} />
+            <TodoForm
+              toggleIsTodoEditing={toggleIsTodoEditing}
+              addTodo={addTodo}
+            />
           ) : (
             <AddTodo toggleIsTodoEditing={toggleIsTodoEditing} />
           )}
           {globalTodos.map((todo) => (
-            <Todo title={todo} />
+            <Todo
+              key={todo.id}
+              toggleIsTodoFinished={toggleIsTodoFinished}
+              {...todo}
+            />
           ))}
         </div>
       </div>

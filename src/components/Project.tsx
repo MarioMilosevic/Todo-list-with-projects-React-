@@ -21,6 +21,8 @@ const Project = ({
 }: ProjectType) => {
   const [todos, setTodos] = useState([]);
 
+  
+
   const projectClass = isClicked ? "bg-neutral-300" : "bg-neutral-500";
   return (
     <div className="bg-neutral-500 flex flex-col px-4 py-3">
