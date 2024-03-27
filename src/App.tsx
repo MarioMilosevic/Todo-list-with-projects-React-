@@ -7,7 +7,8 @@ import AddTodo from "./components/AddTodo";
 import Footer from "./components/Footer";
 import TodoForm from "./components/TodoForm";
 import { useState } from "react";
-
+// da selektujem projekat, on dobije klasu, ostali ne dobiju klasu
+// njemu stavim da je selektovan njima da nisu, znaci kliknuti da ostali ne
 function App() {
   const [isProjectEditing, setIsProjectEditing] = useState(false);
   const [projects, setProjects] = useState([]);
@@ -20,6 +21,15 @@ function App() {
 
   const addProject = (newProject: string) => {
     setProjects((prev) => [...prev, newProject]);
+  };
+
+  const isSelected = (id: string) => {
+    const updatedProjects = projects.map((project) => ({
+      ...project,
+      isClicked: project.id === id ? true : project.isClicked,
+    }));
+    setProjects(updatedProjects);
+    console.log(projects);
   };
 
   return (
@@ -35,16 +45,24 @@ function App() {
           ) : (
             <AddProject toggleIsProjectEditing={toggleIsProjectEditing} />
           )}
-          {projects.map((project, index) => {
-            console.log(project); // Move the console.log() here
-            return <Project key={index} title={project} />;
+          {projects.map((project: { id: string; title: string, isClicked:boolean }) => {
+            return (
+              <Project
+                key={project.id}
+                {...project}
+                // id={project.id}
+                // title={project.title}
+                // isClicked={project.isClicked}
+                isSelected={isSelected}
+              />
+            );
           })}
         </div>
         <div className="bg-neutral-300 w-[80%] pl-60 pt-12 border border-black">
           <h2 className="text-4xl pl-6 font-semibold">Todos</h2>
           {isTodoEditing ? <TodoForm /> : <AddTodo />}
           {todos.map((todo) => (
-            <Todo title={todo.title} />
+            <Todo title={todo} />
           ))}
         </div>
       </div>

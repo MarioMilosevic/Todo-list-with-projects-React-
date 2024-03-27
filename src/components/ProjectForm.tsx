@@ -2,24 +2,40 @@ import Button from "./Button";
 import { useState } from "react";
 interface ProjectFormTypes {
   toggleIsProjectEditing: () => void;
-  addProject: (inputValue:string) => void;
+  addProject: (project: {
+    title: string;
+    id: string;
+    isClicked: boolean;
+  }) => void;
 }
 const ProjectForm = ({
   toggleIsProjectEditing,
   addProject,
 }: ProjectFormTypes) => {
-  const [inputValue, setInputValue] = useState("");
+  
+  const [project, setProject] = useState({
+    title: "",
+    id: "",
+    isClicked: false,
+  });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); 
-    addProject(inputValue);
+    event.preventDefault();
+    addProject(project);
+    setProject({ title: "", id: "", isClicked: false });
   };
 
   return (
     <form className="bg-neutral-500 p-4">
       <input
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
+        value={project.title}
+        onChange={(e) =>
+          setProject((prev) => ({
+            ...prev,
+            title: e.target.value,
+            id: crypto.randomUUID(),
+          }))
+        }
         type="text"
         className="bg-neutral-200 flex justify-between cursor-pointer items-center p-3 px-6 w-[80%] text-2xl mx-auto mt-24 rounded-full hover:bg-neutral-300"
       ></input>
