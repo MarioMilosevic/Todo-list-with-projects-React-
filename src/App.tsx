@@ -24,12 +24,11 @@ function App() {
   };
 
   const isSelected = (id: string) => {
-    const updatedProjects = projects.map((project) => ({
-      ...project,
-      isClicked: project.id === id ? true : project.isClicked,
-    }));
-    setProjects(updatedProjects);
-    console.log(projects);
+    const updatedProjects = projects.map(project => ({
+      ...project, 
+      isClicked:project.id === id
+    }))
+    setProjects(updatedProjects)
   };
 
   return (
