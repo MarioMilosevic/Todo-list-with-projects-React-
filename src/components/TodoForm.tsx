@@ -1,17 +1,14 @@
 import { useState } from "react";
 import Button from "./Button";
+import { todoState } from "../initialState";
+
 interface TodoFormTypes {
   toggleIsTodoEditing: () => void;
   addTodo: (newTodo: string) => void;
 }
 
 const TodoForm = ({ toggleIsTodoEditing, addTodo }: TodoFormTypes) => {
-  const [todoForm, setForm] = useState({
-    title: "",
-    id: "",
-    isFinished: false,
-    date: "",
-  });
+  const [todoForm, setForm] = useState(todoState);
 
   const handleAddTodo = () => {
     toggleIsTodoEditing()

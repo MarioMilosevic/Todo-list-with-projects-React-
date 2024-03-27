@@ -1,5 +1,7 @@
 import Button from "./Button";
 import { useState } from "react";
+import { projectState } from "../initialState";
+
 interface ProjectFormTypes {
   toggleIsProjectEditing: () => void;
   addProject: (project: {
@@ -12,18 +14,13 @@ const ProjectForm = ({
   toggleIsProjectEditing,
   addProject,
 }: ProjectFormTypes) => {
-
-  const [project, setProject] = useState({
-    title: "",
-    id: "",
-    isClicked: false,
-  });
+  const [project, setProject] = useState(projectState);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if(project.title){
+    if (project.title) {
       addProject(project);
-      toggleIsProjectEditing()
+      toggleIsProjectEditing();
       setProject({ title: "", id: "", isClicked: false });
     }
   };
