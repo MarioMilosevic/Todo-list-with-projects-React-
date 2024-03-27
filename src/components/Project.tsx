@@ -1,11 +1,14 @@
 import { MdDeleteForever } from "react-icons/md";
-
+import { useState } from "react";
 interface ProjectType {
   title: string;
   id: string;
   isClicked: boolean;
   isSelected: (id: string) => void;
-  deleteProject: (id: string) => void;
+  deleteProject: (
+    e: React.MouseEvent<SVGElement, MouseEvent>,
+    id: string
+  ) => void;
 }
 
 const Project = ({
@@ -14,10 +17,12 @@ const Project = ({
   isClicked,
   isSelected,
   deleteProject,
+  updateProject
 }: ProjectType) => {
-  const baseClass = "bg-neutral-500";
-  const selectedClass = "bg-neutral-300";
-  const projectClass = isClicked ? selectedClass : baseClass;
+
+  const [todos,setTodos] = useState([])
+
+  const projectClass = isClicked ? "bg-neutral-300" : "bg-neutral-500";
   return (
     <div className="bg-neutral-500 flex flex-col px-4 py-3">
       <div
@@ -39,7 +44,7 @@ const Project = ({
           />
         </svg>
         <h2>{title}</h2>
-        <MdDeleteForever onClick={() => deleteProject(id)} />
+        <MdDeleteForever onClick={(e) => deleteProject(e, id)} />
       </div>
     </div>
   );

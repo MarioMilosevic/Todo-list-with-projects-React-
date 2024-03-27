@@ -7,12 +7,12 @@ import AddTodo from "./components/AddTodo";
 import Footer from "./components/Footer";
 import TodoForm from "./components/TodoForm";
 import { useState } from "react";
-
+// da 
 function App() {
   const [isProjectEditing, setIsProjectEditing] = useState(false);
   const [projects, setProjects] = useState([]);
   const [isTodoEditing, setIsTodoEditing] = useState(false);
-  const [todos, setTodos] = useState([]);
+  const [globalTodos, setGlobalTodos] = useState([]);
 
   const toggleIsProjectEditing = () => {
     setIsProjectEditing((prev) => !prev);
@@ -22,7 +22,8 @@ function App() {
     setProjects((prev) => [...prev, newProject]);
   };
 
-  const deleteProject = (id: string) => {  
+  const deleteProject = (e, id: string) => {
+    e.stopPropagation()  
     const filteredProjects = projects.filter(project => project.id !== id)
     setProjects(filteredProjects);
   };
@@ -32,9 +33,18 @@ function App() {
       ...project,
       isClicked: project.id === id,
     }));
-    console.log("selekted")
     setProjects(updatedProjects);
   };
+
+  const updateTodos = () => {
+    console.log("update")
+  }
+
+  const toggleIsTodoEditing = () => {
+    console.log('nesto radi')
+    setIsTodoEditing((prev) => !prev);
+
+  }
 
   return (
     <>
@@ -57,6 +67,7 @@ function App() {
                   {...project}
                   isSelected={isSelected}
                   deleteProject={deleteProject}
+                  updateTodos={updateTodos}
                 />
               );
             }
@@ -64,8 +75,8 @@ function App() {
         </div>
         <div className="bg-neutral-300 w-[80%] pl-60 pt-12 border border-black">
           <h2 className="text-4xl pl-6 font-semibold">Todos</h2>
-          {isTodoEditing ? <TodoForm /> : <AddTodo />}
-          {todos.map((todo) => (
+          {isTodoEditing ? <TodoForm toggleIsTodoEditing={toggleIsTodoEditing}/> : <AddTodo toggleIsTodoEditing={toggleIsTodoEditing}/>}
+          {globalTodos.map((todo) => (
             <Todo title={todo} />
           ))}
         </div>

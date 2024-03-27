@@ -1,5 +1,8 @@
 import Button from "./Button";
-const TodoForm = () => {
+interface TodoFormTypes {
+  toggleIsTodoEditing:()=> void
+}
+const TodoForm = ({toggleIsTodoEditing}) => {
   return (
     <>
       <div className="w-[35%] mt-6">
@@ -14,7 +17,7 @@ const TodoForm = () => {
           <Button hoverColor="hover:bg-green-600" color="bg-green-500">
             Add
           </Button>
-          <Button hoverColor="hover:bg-red-600" color="bg-red-500">
+          <Button hoverColor="hover:bg-red-600" color="bg-red-500" handleClick={toggleIsTodoEditing}>
             Cancel
           </Button>
         </div>
