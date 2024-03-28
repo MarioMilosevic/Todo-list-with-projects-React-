@@ -16,13 +16,12 @@ function App() {
   const [projects, setProjects] = useState([]);
 
   const [isTodoEditing, setIsTodoEditing] = useState(false);
-  const [activeProject, setActiveProject] = useState(projectState);
+  // const [activeProject, setActiveProject] = useState(projectState);
 
-  let mario 
-  // const mari/o = projects.find(project => project.isClicked)
+  let selectedProject;
 
-  if(projects.length > 0) {
-   mario = projects.find(project => project.isClicked)
+  if (projects.length > 0) {
+    selectedProject = projects.find((project) => project.isClicked);
   }
 
   const toggleIsProjectEditing = () => {
@@ -54,14 +53,13 @@ function App() {
   };
 
   const isSelected = (id: string) => {
-    const selectedProject = projects.find((project) => project.id === id);
     const updatedProjects = projects.map((project) => ({
       ...project,
       isClicked: project.id === id,
     }));
     setProjects(updatedProjects);
-    setActiveProject(selectedProject);
-    // mario = selectedProject
+    // setActiveProject(selectedProject);
+    // selectedProject = selectedProject
   };
 
   const toggleIsTodoEditing = () => {
@@ -114,14 +112,14 @@ function App() {
           ) : (
             <AddTodo toggleIsTodoEditing={toggleIsTodoEditing} />
           )}
-          {/* {console.log(activeProject.todos)} */}
-          {mario && mario.todos.map((todo) => (
-            <Todo
-              key={todo.id}
-              toggleIsTodoFinished={toggleIsTodoFinished}
-              {...todo}
-            />
-          ))}
+          {selectedProject &&
+            selectedProject.todos.map((todo) => (
+              <Todo
+                key={todo.id}
+                toggleIsTodoFinished={toggleIsTodoFinished}
+                {...todo}
+              />
+            ))}
         </div>
       </div>
       <Footer />
