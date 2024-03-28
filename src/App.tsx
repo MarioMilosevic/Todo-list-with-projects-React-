@@ -7,49 +7,65 @@ import AddTodo from "./components/AddTodo";
 import Footer from "./components/Footer";
 import TodoForm from "./components/TodoForm";
 import { projectState } from "./initialState";
+import { todoState } from "./initialState";
+import Project2 from "./components/Project2";
 import { useState } from "react";
-
+import { ProjectState, TodoFormState } from "./types/ResumeTypes";
+// const projects = [
+//   {
+//     id: 1,
+//     name: "Sir",
+//     todos: [
+//       {
+//         id: 11,
+//         name: "Mast",
+//       },
+//     ],
+//   },
+//   {
+//     id: 2,
+//     name: "Nesto drugo ",
+//     todos: [
+//       {
+//         id: 2,
+//         name: "Nesto trece",
+//       },
+//     ],
+//   },
+// ];
 function App() {
   const [isProjectEditing, setIsProjectEditing] = useState(false);
   const [projects, setProjects] = useState([]);
+
   const [isTodoEditing, setIsTodoEditing] = useState(false);
-  // const [globalTodos, setGlobalTodos] = useState([]);
+  const [globalTodos, setGlobalTodos] = useState([]);
+  const [state, setState] = useState(projects);
   const [activeProject, setActiveProject] = useState(projectState);
 
   const toggleIsProjectEditing = () => {
     setIsProjectEditing((prev) => !prev);
   };
 
-  const addProject = (newProject: string) => {
+  const addProject = (newProject: ProjectState) => {
     setProjects((prev) => [...prev, newProject]);
   };
+  //////////////////////////////////////////////////////////////////////////////////////////////
+  const addTodo = (newTodo: TodoFormState) => {
+    const selectedProject = projects.find((project) => project.isClicked);
+    console.log(selectedProject);
 
-  // const addTodo = (newTodo: string) => {
-  //   // setGlobalTodos((prev) => [...prev, newTodo]);
-  //   // setActiveProject((prev) => ({
-  //   //   ...prev,
-  //   //   todos: [...prev.todos, newTodo],
-  //   // }));
-  //   setProjects(prev => ())
-  //   setIsTodoEditing(false);
-  //   console.log('add todo')
-  //   console.log(activeProject)
-  //   // TREBA TESTIRATI
-  // };
-
-  const addTodo = (newTodo: string) => {
     setProjects((prev) =>
       prev.map((project) =>
-        project.isClicked
+        project === selectedProject
           ? { ...project, todos: [...project.todos, newTodo] }
           : project
       )
     );
-    setIsTodoEditing(false);
-    console.log("add todo");
-    console.log(activeProject);
-    console.log(projects)
+    // ne valja
+    setGlobalTodos(selectedProject.todos);
+    console.log(projects);
   };
+  ////////////////////////////////////////////////////////////////////////////////////////
 
   const deleteProject = (e, id: string) => {
     e.stopPropagation();
@@ -58,17 +74,13 @@ function App() {
   };
 
   const isSelected = (id: string) => {
+    const selectedProject = projects.find((project) => project.id === id);
+    setActiveProject(selectedProject);
     const updatedProjects = projects.map((project) => ({
       ...project,
       isClicked: project.id === id,
     }));
     setProjects(updatedProjects);
-    const selectedProject = updatedProjects.find(
-      (project) => project.id === id
-    );
-    setActiveProject(selectedProject);
-    console.log(projects);
-    console.log(activeProject);
   };
 
   const updateTodos = () => {
@@ -80,19 +92,12 @@ function App() {
   };
 
   const toggleIsTodoFinished = (id: string) => {
-    // setGlobalTodos((prev) => {
-    //   const updatedTodos = prev.map((todo) =>
-    //     todo.id === id ? { ...todo, isFinished: !todo.isFinished } : todo
-    //   );
-    //   return updatedTodos;
-    // });
-    setActiveProject((prev) => ({
-      ...prev,
-      todos: prev.todos.map((todo) =>
+    setGlobalTodos((prev) => {
+      const updatedTodos = prev.map((todo) =>
         todo.id === id ? { ...todo, isFinished: !todo.isFinished } : todo
-      ),
-    }));
-    // TREBA TESTIRATI
+      );
+      return updatedTodos;
+    });
   };
 
   return (
@@ -133,18 +138,28 @@ function App() {
           ) : (
             <AddTodo toggleIsTodoEditing={toggleIsTodoEditing} />
           )}
-          {activeProject.todos.map((todo) => (
-            <Todo
-              key={todo.id}
-              toggleIsTodoFinished={toggleIsTodoFinished}
-              {...todo}
-            />
-          ))}
+          {activeProject &&
+            activeProject.todos.map((todo) => (
+              <Todo
+                key={todo.id}
+                toggleIsTodoFinished={toggleIsTodoFinished}
+                {...todo}
+              />
+            ))}
         </div>
       </div>
       <Footer />
+
+      {/* <TodoForm></TodoForm>
+      {state.map((project) => (
+        <Project2 {...project} />
+      ))} */}
     </>
   );
 }
 
 export default App;
+
+// imam array projekata, svaki projekat ima svoj array
+// imam array prikazanihToduova koji trebaju da prikazu array od projekta
+// kada kliknem na projekat, dam mu klasu, i kazem mu isSelected:true

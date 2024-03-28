@@ -27,7 +27,7 @@ const TodoForm = ({ toggleIsTodoEditing, addTodo }: TodoFormTypes) => {
 
   return (
     <>
-      <div className="w-[35%] mt-6">
+      <form className="w-[35%] mt-6">
         <div className="flex gap-4 items-center mb-4">
           <input
             value={todoForm.title}
@@ -66,7 +66,7 @@ const TodoForm = ({ toggleIsTodoEditing, addTodo }: TodoFormTypes) => {
             Cancel
           </Button>
         </div>
-      </div>
+      </form>
     </>
   );
 };
