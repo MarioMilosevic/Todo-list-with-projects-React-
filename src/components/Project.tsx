@@ -1,5 +1,4 @@
 import { MdDeleteForever } from "react-icons/md";
-import { useState } from "react";
 interface ProjectType {
   title: string;
   id: string;
@@ -17,11 +16,7 @@ const Project = ({
   isClicked,
   isSelected,
   deleteProject,
-  updateProject,
 }: ProjectType) => {
-  const [todos, setTodos] = useState([]);
-
-  
 
   const projectClass = isClicked ? "bg-neutral-300" : "bg-neutral-500";
   return (

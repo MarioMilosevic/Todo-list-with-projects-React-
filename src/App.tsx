@@ -8,38 +8,14 @@ import Footer from "./components/Footer";
 import TodoForm from "./components/TodoForm";
 import { projectState } from "./initialState";
 import { todoState } from "./initialState";
-import Project2 from "./components/Project2";
 import { useState } from "react";
 import { ProjectState, TodoFormState } from "./types/ResumeTypes";
-// const projects = [
-//   {
-//     id: 1,
-//     name: "Sir",
-//     todos: [
-//       {
-//         id: 11,
-//         name: "Mast",
-//       },
-//     ],
-//   },
-//   {
-//     id: 2,
-//     name: "Nesto drugo ",
-//     todos: [
-//       {
-//         id: 2,
-//         name: "Nesto trece",
-//       },
-//     ],
-//   },
-// ];
+
 function App() {
   const [isProjectEditing, setIsProjectEditing] = useState(false);
   const [projects, setProjects] = useState([]);
 
   const [isTodoEditing, setIsTodoEditing] = useState(false);
-  const [globalTodos, setGlobalTodos] = useState([]);
-  const [state, setState] = useState(projects);
   const [activeProject, setActiveProject] = useState(projectState);
 
   const toggleIsProjectEditing = () => {
@@ -49,11 +25,9 @@ function App() {
   const addProject = (newProject: ProjectState) => {
     setProjects((prev) => [...prev, newProject]);
   };
-  //////////////////////////////////////////////////////////////////////////////////////////////
+
   const addTodo = (newTodo: TodoFormState) => {
     const selectedProject = projects.find((project) => project.isClicked);
-    console.log(selectedProject);
-
     setProjects((prev) =>
       prev.map((project) =>
         project === selectedProject
@@ -61,11 +35,8 @@ function App() {
           : project
       )
     );
-    // ne valja
-    setGlobalTodos(selectedProject.todos);
-    console.log(projects);
+    setActiveProject(selectedProject)
   };
-  ////////////////////////////////////////////////////////////////////////////////////////
 
   const deleteProject = (e, id: string) => {
     e.stopPropagation();
@@ -83,21 +54,23 @@ function App() {
     setProjects(updatedProjects);
   };
 
-  const updateTodos = () => {
-    console.log("update");
-  };
-
   const toggleIsTodoEditing = () => {
     setIsTodoEditing((prev) => !prev);
   };
 
   const toggleIsTodoFinished = (id: string) => {
-    setGlobalTodos((prev) => {
-      const updatedTodos = prev.map((todo) =>
+    setProjects((prev) => {
+      const updatedProjects = prev.map((todo) =>
         todo.id === id ? { ...todo, isFinished: !todo.isFinished } : todo
       );
-      return updatedTodos;
+      return updatedProjects;
     });
+    // setGlobalTodos((prev) => {
+    //   const updatedTodos = prev.map((todo) =>
+    //     todo.id === id ? { ...todo, isFinished: !todo.isFinished } : todo
+    //   );
+    //   return updatedTodos;
+    // });
   };
 
   return (
@@ -122,7 +95,6 @@ function App() {
                   {...project}
                   isSelected={isSelected}
                   deleteProject={deleteProject}
-                  updateTodos={updateTodos}
                 />
               );
             }
@@ -138,22 +110,16 @@ function App() {
           ) : (
             <AddTodo toggleIsTodoEditing={toggleIsTodoEditing} />
           )}
-          {activeProject &&
-            activeProject.todos.map((todo) => (
-              <Todo
-                key={todo.id}
-                toggleIsTodoFinished={toggleIsTodoFinished}
-                {...todo}
-              />
-            ))}
+          {activeProject.todos.map((todo) => (
+            <Todo
+              key={todo.id}
+              toggleIsTodoFinished={toggleIsTodoFinished}
+              {...todo}
+            />
+          ))}
         </div>
       </div>
       <Footer />
-
-      {/* <TodoForm></TodoForm>
-      {state.map((project) => (
-        <Project2 {...project} />
-      ))} */}
     </>
   );
 }
