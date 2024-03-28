@@ -21,9 +21,8 @@ const Todo = ({
   const [isEditing, setIsEditing] = useState(false);
 
   const toggleIsEditing = () => {
-    setIsEditing(prev => !prev)
-  }
-
+    setIsEditing((prev) => !prev);
+  };
 
   return (
     <>
@@ -65,7 +64,7 @@ const Todo = ({
           </div>
         </div>
       </div>
-      {isEditing && <EditTodoForm />}
+      {isEditing && <EditTodoForm title={title} id={id} date={date} />}
     </>
   );
 };

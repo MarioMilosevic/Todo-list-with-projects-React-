@@ -28,6 +28,7 @@ function App() {
 
   const addTodo = (newTodo: TodoFormState) => {
     const selectedProject = projects.find((project) => project.isClicked);
+ 
     setProjects((prev) =>
       prev.map((project) =>
         project === selectedProject
@@ -35,10 +36,12 @@ function App() {
           : project
       )
     );
-    setActiveProject(selectedProject)
   };
 
-  const deleteProject = (e, id: string) => {
+  const deleteProject = (
+    e: React.MouseEvent<SVGElement, MouseEvent>,
+    id: string
+  ) => {
     e.stopPropagation();
     const filteredProjects = projects.filter((project) => project.id !== id);
     setProjects(filteredProjects);
@@ -65,12 +68,6 @@ function App() {
       );
       return updatedProjects;
     });
-    // setGlobalTodos((prev) => {
-    //   const updatedTodos = prev.map((todo) =>
-    //     todo.id === id ? { ...todo, isFinished: !todo.isFinished } : todo
-    //   );
-    //   return updatedTodos;
-    // });
   };
 
   return (

@@ -22,7 +22,6 @@ const TodoForm = ({ toggleIsTodoEditing, addTodo }: TodoFormTypes) => {
   const handleAddTodo = () => {
     toggleIsTodoEditing()
     addTodo(todoForm)
-    console.log('radi')
   }
 
   return (
