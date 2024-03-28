@@ -14,19 +14,20 @@ const TodoForm = ({ toggleIsTodoEditing, addTodo }: TodoFormTypes) => {
   //   isFinished: false,
   //   date: "",
   // };
-  const [todoForm, setForm] = useState(todoState);
   // proslijediti objekat sa toduovima ili samo tudue od objekta
   // proslijediti funkciju koja ce da apdejtuje taj arrej objekta
-  // i na kraju reci da renderuje samo one tudue on selektovanog projekta 
+  // i na kraju reci da renderuje samo one tudue on selektovanog projekta
+  const [todoForm, setForm] = useState(todoState);
 
-  const handleAddTodo = () => {
-    toggleIsTodoEditing()
-    addTodo(todoForm)
-  }
+  const handleAddTodo = (e) => {
+    e.preventDefault();
+    toggleIsTodoEditing();
+    addTodo(todoForm);
+  };
 
   return (
     <>
-      <div className="w-[35%] mt-6">
+      <form className="w-[35%] mt-6">
         <div className="flex gap-4 items-center mb-4">
           <input
             value={todoForm.title}
@@ -53,7 +54,7 @@ const TodoForm = ({ toggleIsTodoEditing, addTodo }: TodoFormTypes) => {
           <Button
             hoverColor="hover:bg-green-600"
             color="bg-green-500"
-            handleClick={() => handleAddTodo()}
+            handleClick={handleAddTodo}
           >
             Add
           </Button>
@@ -65,7 +66,7 @@ const TodoForm = ({ toggleIsTodoEditing, addTodo }: TodoFormTypes) => {
             Cancel
           </Button>
         </div>
-      </div>
+      </form>
     </>
   );
 };

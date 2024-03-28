@@ -64,7 +64,7 @@ const Todo = ({
           </div>
         </div>
       </div>
-      {isEditing && <EditTodoForm title={title} id={id} date={date} />}
+      {isEditing && <EditTodoForm  title={title} id={id} date={date} />}
     </>
   );
 };
