@@ -2,6 +2,7 @@ import { FaEdit } from "react-icons/fa";
 import { FaCalendarAlt } from "react-icons/fa";
 import Button from "./Button";
 import EditTodoForm from "./EditTodoForm";
+import { useState } from "react";
 
 interface TodoTypes {
   title: string;
@@ -17,6 +18,13 @@ const Todo = ({
   isFinished,
   toggleIsTodoFinished,
 }: TodoTypes) => {
+  const [isEditing, setIsEditing] = useState(false);
+
+  const toggleIsEditing = () => {
+    setIsEditing(prev => !prev)
+  }
+
+
   return (
     <>
       <div className="w-[80%] mt-4 p-4 flex justify-between text-xl rounded-lg items-center border border-neutral-500">
@@ -31,7 +39,7 @@ const Todo = ({
 
           <div className="flex gap-4">
             <Button
-              handleClick={() => console.log("nesto")}
+              handleClick={toggleIsEditing}
               hoverColor="bg-green-600"
               color="bg-green-500"
             >
@@ -57,7 +65,7 @@ const Todo = ({
           </div>
         </div>
       </div>
-      <EditTodoForm />
+      {isEditing && <EditTodoForm />}
     </>
   );
 };
