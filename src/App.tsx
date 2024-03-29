@@ -14,6 +14,7 @@ function App() {
   const [projects, setProjects] = useState<ProjectState[]>([]);
   const [isTodoEditing, setIsTodoEditing] = useState(false);
   const [activeProjectId, setActiveProjectId] = useState("");
+
   const currentDate = new Date().toISOString().slice(0, 10);
 
   const toggleIsProjectEditing = () => {

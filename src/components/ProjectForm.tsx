@@ -1,5 +1,4 @@
 import Button from "./Button";
-import { FormEvent } from "react";
 import { useState, useRef, useEffect } from "react";
 import { projectState } from "../initialState";
 import { ProjectState } from "../types/ResumeTypes";
@@ -20,7 +19,7 @@ const ProjectForm = ({
     inputRef.current?.focus();
   }, []);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>):void => {
+  const handleSubmit = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     if (project.title) {
       addProject(project);
@@ -45,13 +44,7 @@ const ProjectForm = ({
         className="bg-neutral-200 flex justify-between cursor-pointer items-center p-3 px-6 w-[80%] text-2xl mx-auto mt-6 rounded-full hover:bg-neutral-300"
       ></input>
       <div className="flex gap-4 w-[80%] mx-auto mt-2">
-        <Button
-          handleClick={handleSubmit}
-          hoverColor="hover:bg-green-600"
-          color="bg-green-500"
-        >
-          Add
-        </Button>
+        <button className="px-4 py-2 w-full text-xl font-semibold rounded-lg bg-green-600 hover:bg-green-600" onClickCapture={(e) => handleSubmit(e)}>Add</button>
         <Button
           handleClick={toggleIsProjectEditing}
           hoverColor="hover:bg-red-600"

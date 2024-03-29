@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Button from "./Button";
-// import { todoState } from "../initialState";
 import { TodoFormState } from "../types/ResumeTypes";
 import { MouseEvent } from "react";
 
@@ -18,7 +17,7 @@ const TodoForm = ({ toggleIsTodoEditing, addTodo, currentDate }: TodoFormTypes) 
       isFinished: false,
   });
 
-  const handleAddTodo = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleAddTodo = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     e.preventDefault();
     toggleIsTodoEditing();
     addTodo(todoForm);
@@ -51,13 +50,7 @@ const TodoForm = ({ toggleIsTodoEditing, addTodo, currentDate }: TodoFormTypes) 
           />
         </div>
         <div className="flex gap-4  mx-auto mt-2">
-          <Button
-            hoverColor="hover:bg-green-600"
-            color="bg-green-500"
-            handleClick={handleAddTodo}
-          >
-            Add
-          </Button>
+          <button className="px-4 py-2 w-full text-xl font-semibold rounded-lg bg-green-500 hover:bg-green-600" onClick={(e) => handleAddTodo(e)}>Add</button>
           <Button
             hoverColor="hover:bg-red-600"
             color="bg-red-500"
