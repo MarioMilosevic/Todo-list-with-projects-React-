@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import TodoForm from "./components/TodoForm";
 import { projectState } from "./initialState";
 import { todoState } from "./initialState";
+import ProjectTodos from "./components/ProjectTodos";
 import { useState } from "react";
 import { ProjectState, TodoFormState } from "./types/ResumeTypes";
 import { MdEditNotifications } from "react-icons/md";
@@ -135,19 +136,12 @@ function App() {
           ) : (
             <AddTodo toggleIsTodoEditing={toggleIsTodoEditing} />
           )}
-          {activeProjectId &&
-            projects
-              .find((project) => project.id === activeProjectId)
-              ?.todos.map((todo) => (
-                <Todo
-                  key={todo.id}
-                  toggleIsTodoFinished={toggleIsTodoFinished}
-                  deleteTodo={deleteTodo}
-                  saveEditTodo={saveEditTodo}
-                  {...todo}
-                />
-              ))}
-          {/* {projects.map(project => project.id === activeProjectId ? <Project /> : null)} */}
+
+          {projects.map((project) =>
+            project.id === activeProjectId ? (
+              <ProjectTodos todos={project.todos} />
+            ) : null
+          )}
         </div>
       </div>
       <Footer />
