@@ -3,15 +3,15 @@ import { FaCalendarAlt } from "react-icons/fa";
 import Button from "./Button";
 import EditTodoForm from "./EditTodoForm";
 import { useState } from "react";
+import { TodoFormState } from "../types/ResumeTypes";
 
 interface TodoTypes {
   title: string;
   date: string;
   isFinished: boolean;
   id: string;
-  toggleIsTodoFinished: (id: string) => void;
   deleteTodo: (id: string) => void;
-  saveEditTodo: (id: string) => void;
+  saveEditTodo: (id: string, newTodo:TodoFormState) => void;
 }
 const Todo = ({
   title,

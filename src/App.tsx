@@ -5,16 +5,15 @@ import Project from "./components/Project";
 import AddTodo from "./components/AddTodo";
 import Footer from "./components/Footer";
 import TodoForm from "./components/TodoForm";
-import { projectState } from "./initialState";
-import { todoState } from "./initialState";
+// import { projectState } from "./initialState";
+// import { todoState } from "./initialState";
 import ProjectTodos from "./components/ProjectTodos";
 import { useState } from "react";
 import { ProjectState, TodoFormState } from "./types/ResumeTypes";
 
 function App() {
   const [isProjectEditing, setIsProjectEditing] = useState(false);
-  const [projects, setProjects] = useState([]);
-
+  const [projects, setProjects] = useState<ProjectState[]>([]);
   const [isTodoEditing, setIsTodoEditing] = useState(false);
   const [activeProjectId, setActiveProjectId] = useState("");
 
@@ -59,7 +58,7 @@ function App() {
     });
   };
 
-  const saveEditTodo = (id: string, updatedTodo) => {
+  const saveEditTodo = (id: string, updatedTodo:TodoFormState) => {
     setProjects((prev) =>
       prev.map((project) =>
         project.id === activeProjectId

@@ -1,25 +1,18 @@
 import { useState } from "react";
 import Button from "./Button";
 import { todoState } from "../initialState";
+import { TodoFormState } from "../types/ResumeTypes";
+import { MouseEvent } from "react";
 
 interface TodoFormTypes {
   toggleIsTodoEditing: () => void;
-  addTodo: (newTodo: string) => void;
+  addTodo: (newTodo: TodoFormState) => void;
 }
 
 const TodoForm = ({ toggleIsTodoEditing, addTodo }: TodoFormTypes) => {
-  // export const todoState: TodoFormState = {
-  //   title: "",
-  //   id: "",
-  //   isFinished: false,
-  //   date: "",
-  // };
-  // proslijediti objekat sa toduovima ili samo tudue od objekta
-  // proslijediti funkciju koja ce da apdejtuje taj arrej objekta
-  // i na kraju reci da renderuje samo one tudue on selektovanog projekta
   const [todoForm, setForm] = useState(todoState);
 
-  const handleAddTodo = (e) => {
+  const handleAddTodo = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     toggleIsTodoEditing();
     addTodo(todoForm);

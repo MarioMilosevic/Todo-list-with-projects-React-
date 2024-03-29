@@ -1,10 +1,26 @@
 import Todo from "./Todo";
+import { TodoFormState } from "../types/ResumeTypes";
 
-const ProjectTodos = ({ todos, deleteTodo, saveEditTodo }) => {
+type ProjectTodosTypes = {
+  todos: TodoFormState[];
+  deleteTodo: (id: string) => void;
+  saveEditTodo: (id: string, newTodo:TodoFormState) => void;
+};
+
+const ProjectTodos = ({
+  todos,
+  deleteTodo,
+  saveEditTodo,
+}: ProjectTodosTypes) => {
   return (
     <>
       {todos.map((todo) => (
-        <Todo key={todo.id} {...todo}  deleteTodo={deleteTodo} saveEditTodo={saveEditTodo}/>
+        <Todo
+          key={todo.id}
+          {...todo}
+          deleteTodo={deleteTodo}
+          saveEditTodo={saveEditTodo}
+        />
       ))}
     </>
   );

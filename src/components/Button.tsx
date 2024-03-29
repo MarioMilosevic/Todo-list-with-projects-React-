@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
+import { ReactNode, MouseEvent, FormEvent } from "react";
 interface ButtonType {
   children: ReactNode;
   color: string;
   hoverColor: string;
-  handleClick: () => void;
+  handleClick: (event: MouseEvent<HTMLButtonElement> | FormEvent<HTMLFormElement>) => void | (() => void);
 }
 
 const Button = ({ children, color, hoverColor, handleClick }: ButtonType) => {

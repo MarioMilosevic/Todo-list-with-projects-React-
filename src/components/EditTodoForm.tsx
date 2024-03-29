@@ -1,11 +1,6 @@
+import { TodoFormState } from "../types/ResumeTypes";
 import Button from "./Button";
 import { useState } from "react";
-
-type EditTodoValue = {
-  title: string;
-  date: string;
-  id: string;
-};
 
 type EditTodoFormType = {
   title: string;
@@ -13,7 +8,7 @@ type EditTodoFormType = {
   isFinished: boolean;
   id: string;
   toggleIsEditing: () => void;
-  saveEditTodo: (id: string, updatedTodo: EditTodoValue) => void;
+  saveEditTodo: (id: string, newTodo: TodoFormState) => void;
 };
 
 const EditTodoForm = ({

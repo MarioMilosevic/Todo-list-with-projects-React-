@@ -11,6 +11,7 @@ export const projectState: ProjectState = {
 export const todoState: TodoFormState = {
   title: "",
   id: "",
-  isFinished: false,
   date: "",
+  isFinished: false,
 };
+

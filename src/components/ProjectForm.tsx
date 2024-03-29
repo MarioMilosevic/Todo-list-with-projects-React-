@@ -1,14 +1,12 @@
 import Button from "./Button";
+import { FormEvent } from "react";
 import { useState, useRef, useEffect } from "react";
 import { projectState } from "../initialState";
+import { ProjectState } from "../types/ResumeTypes";
 
 interface ProjectFormTypes {
   toggleIsProjectEditing: () => void;
-  addProject: (project: {
-    title: string;
-    id: string;
-    isClicked: boolean;
-  }) => void;
+  addProject:(project:ProjectState) => void
 }
 const ProjectForm = ({
   toggleIsProjectEditing,
@@ -22,8 +20,8 @@ const ProjectForm = ({
     inputRef.current?.focus();
   }, []);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>):void => {
+    e.preventDefault();
     if (project.title) {
       addProject(project);
       toggleIsProjectEditing();
