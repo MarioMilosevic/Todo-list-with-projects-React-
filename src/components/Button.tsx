@@ -3,7 +3,7 @@ interface ButtonType {
   children: ReactNode;
   color: string;
   hoverColor: string;
-  handleClick: (event: MouseEvent<HTMLButtonElement> | FormEvent<HTMLFormElement>) => void | (() => void);
+  handleClick: (e: MouseEvent<HTMLButtonElement> | FormEvent<HTMLFormElement> | (() => void)) => void;
 }
 
 const Button = ({ children, color, hoverColor, handleClick }: ButtonType) => {

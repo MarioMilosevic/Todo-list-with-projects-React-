@@ -20,7 +20,7 @@ const ProjectForm = ({
     inputRef.current?.focus();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>):void => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>):void => {
     e.preventDefault();
     if (project.title) {
       addProject(project);

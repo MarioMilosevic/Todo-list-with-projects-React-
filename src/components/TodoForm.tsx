@@ -1,22 +1,29 @@
 import { useState } from "react";
 import Button from "./Button";
-import { todoState } from "../initialState";
+// import { todoState } from "../initialState";
 import { TodoFormState } from "../types/ResumeTypes";
 import { MouseEvent } from "react";
 
 interface TodoFormTypes {
   toggleIsTodoEditing: () => void;
   addTodo: (newTodo: TodoFormState) => void;
+  currentDate:string;
 }
 
-const TodoForm = ({ toggleIsTodoEditing, addTodo }: TodoFormTypes) => {
-  const [todoForm, setForm] = useState(todoState);
+const TodoForm = ({ toggleIsTodoEditing, addTodo, currentDate }: TodoFormTypes) => {
+  const [todoForm, setForm] = useState({
+      title: "",
+      id: "",
+      date: currentDate,
+      isFinished: false,
+  });
 
   const handleAddTodo = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     toggleIsTodoEditing();
     addTodo(todoForm);
   };
+
 
   return (
     <>

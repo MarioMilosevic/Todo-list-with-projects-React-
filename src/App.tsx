@@ -5,8 +5,6 @@ import Project from "./components/Project";
 import AddTodo from "./components/AddTodo";
 import Footer from "./components/Footer";
 import TodoForm from "./components/TodoForm";
-// import { projectState } from "./initialState";
-// import { todoState } from "./initialState";
 import ProjectTodos from "./components/ProjectTodos";
 import { useState } from "react";
 import { ProjectState, TodoFormState } from "./types/ResumeTypes";
@@ -16,6 +14,7 @@ function App() {
   const [projects, setProjects] = useState<ProjectState[]>([]);
   const [isTodoEditing, setIsTodoEditing] = useState(false);
   const [activeProjectId, setActiveProjectId] = useState("");
+  const currentDate = new Date().toISOString().slice(0, 10);
 
   const toggleIsProjectEditing = () => {
     setIsProjectEditing((prev) => !prev);
@@ -83,7 +82,9 @@ function App() {
   };
 
   const toggleIsTodoEditing = () => {
-    setIsTodoEditing((prev) => !prev);
+    if (projects.length > 0 && activeProjectId){
+      setIsTodoEditing((prev) => !prev);
+    }
   };
 
   return (
@@ -119,6 +120,7 @@ function App() {
             <TodoForm
               toggleIsTodoEditing={toggleIsTodoEditing}
               addTodo={addTodo}
+              currentDate={currentDate}
             />
           ) : (
             <AddTodo toggleIsTodoEditing={toggleIsTodoEditing} />
