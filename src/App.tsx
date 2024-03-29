@@ -16,13 +16,7 @@ function App() {
   const [projects, setProjects] = useState([]);
 
   const [isTodoEditing, setIsTodoEditing] = useState(false);
-  // const [activeProject, setActiveProject] = useState(projectState);
-
-  let selectedProject;
-
-  if (projects.length > 0) {
-    selectedProject = projects.find((project) => project.isClicked);
-  }
+  const [activeProjectId, setActiveProjectId] = useState("");
 
   const toggleIsProjectEditing = () => {
     setIsProjectEditing((prev) => !prev);
@@ -52,14 +46,27 @@ function App() {
     setProjects(filteredProjects);
   };
 
+  const deleteTodo = (id:string) => {
+    console.log(id);
+    setProjects((prev) => {
+      const updatedProjects = prev.map((project) => {
+        if (project.id === activeProjectId) {
+          const updatedTodos = project.todos.filter((todo) => todo.id !== id);
+          return { ...project, todos: updatedTodos };
+        }
+        return project;
+      });
+      return updatedProjects;
+    });
+  };
+
   const isSelected = (id: string) => {
+    setActiveProjectId(id);
     const updatedProjects = projects.map((project) => ({
       ...project,
       isClicked: project.id === id,
     }));
     setProjects(updatedProjects);
-    // setActiveProject(selectedProject);
-    // selectedProject = selectedProject
   };
 
   const toggleIsTodoEditing = () => {
@@ -112,14 +119,17 @@ function App() {
           ) : (
             <AddTodo toggleIsTodoEditing={toggleIsTodoEditing} />
           )}
-          {selectedProject &&
-            selectedProject.todos.map((todo) => (
-              <Todo
-                key={todo.id}
-                toggleIsTodoFinished={toggleIsTodoFinished}
-                {...todo}
-              />
-            ))}
+          {activeProjectId &&
+            projects
+              .find((project) => project.id === activeProjectId)
+              ?.todos.map((todo) => (
+                <Todo
+                  key={todo.id}
+                  toggleIsTodoFinished={toggleIsTodoFinished}
+                  deleteTodo={deleteTodo}
+                  {...todo}
+                />
+              ))}
         </div>
       </div>
       <Footer />
@@ -128,7 +138,3 @@ function App() {
 }
 
 export default App;
-
-// imam array projekata, svaki projekat ima svoj array
-// imam array prikazanihToduova koji trebaju da prikazu array od projekta
-// kada kliknem na projekat, dam mu klasu, i kazem mu isSelected:true

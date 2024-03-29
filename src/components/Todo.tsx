@@ -10,6 +10,7 @@ interface TodoTypes {
   isFinished: boolean;
   id: string;
   toggleIsTodoFinished: (id: string) => void;
+  deleteTodo: (id: string) => void;
 }
 const Todo = ({
   title,
@@ -17,6 +18,7 @@ const Todo = ({
   id,
   isFinished,
   toggleIsTodoFinished,
+  deleteTodo,
 }: TodoTypes) => {
   const [isEditing, setIsEditing] = useState(false);
 
@@ -45,7 +47,7 @@ const Todo = ({
               Edit
             </Button>
             <Button
-              handleClick={() => console.log("nesto")}
+              handleClick={() => deleteTodo(id)}
               hoverColor="bg-red-600"
               color="bg-red-500"
             >
@@ -64,7 +66,14 @@ const Todo = ({
           </div>
         </div>
       </div>
-      {isEditing && <EditTodoForm  title={title} id={id} date={date} />}
+      {isEditing && (
+        <EditTodoForm
+          title={title}
+          id={id}
+          date={date}
+          toggleIsEditing={toggleIsEditing}
+        />
+      )}
     </>
   );
 };

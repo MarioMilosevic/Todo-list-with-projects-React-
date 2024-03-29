@@ -4,14 +4,24 @@ type EditTodoFormType = {
   title: string;
   date: string;
   id: string;
+  toggleIsEditing: () => void;
 };
 
-const EditTodoForm = ({ title, date, id }: EditTodoFormType) => {
+const EditTodoForm = ({
+  title,
+  date,
+  id,
+  toggleIsEditing,
+}: EditTodoFormType) => {
   const [editTodoValue, setEditTodoValue] = useState({
     title,
     date,
     id,
   });
+
+  const cancel = () => {
+    console.log("cancel");
+  };
 
   return (
     <>
@@ -45,7 +55,11 @@ const EditTodoForm = ({ title, date, id }: EditTodoFormType) => {
           <Button hoverColor={"hover:bg-green-600"} color={"bg-green-500"}>
             Save
           </Button>
-          <Button hoverColor={"hover:bg-red-600"} color={"bg-red-500"}>
+          <Button
+            handleClick={() => toggleIsEditing()}
+            hoverColor={"hover:bg-red-600"}
+            color={"bg-red-500"}
+          >
             Cancel
           </Button>
         </div>
