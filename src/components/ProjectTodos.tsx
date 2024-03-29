@@ -1,11 +1,10 @@
 import Todo from "./Todo";
 
-const ProjectTodos = ({ todos }) => {
-  console.log(todos);
+const ProjectTodos = ({ todos, deleteTodo, saveEditTodo }) => {
   return (
     <>
       {todos.map((todo) => (
-        <Todo key={todo.id} title={todo.title} date={todo.date} />
+        <Todo key={todo.id} {...todo}  deleteTodo={deleteTodo} saveEditTodo={saveEditTodo}/>
       ))}
     </>
   );

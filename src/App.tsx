@@ -1,6 +1,5 @@
 import Header from "./components/Header";
 import AddProject from "./components/AddProject";
-import Todo from "./components/Todo";
 import ProjectForm from "./components/ProjectForm";
 import Project from "./components/Project";
 import AddTodo from "./components/AddTodo";
@@ -11,7 +10,6 @@ import { todoState } from "./initialState";
 import ProjectTodos from "./components/ProjectTodos";
 import { useState } from "react";
 import { ProjectState, TodoFormState } from "./types/ResumeTypes";
-import { MdEditNotifications } from "react-icons/md";
 
 function App() {
   const [isProjectEditing, setIsProjectEditing] = useState(false);
@@ -62,7 +60,6 @@ function App() {
   };
 
   const saveEditTodo = (id: string, updatedTodo) => {
-    console.log(id);
     setProjects((prev) =>
       prev.map((project) =>
         project.id === activeProjectId
@@ -88,15 +85,6 @@ function App() {
 
   const toggleIsTodoEditing = () => {
     setIsTodoEditing((prev) => !prev);
-  };
-
-  const toggleIsTodoFinished = (id: string) => {
-    setProjects((prev) => {
-      const updatedProjects = prev.map((todo) =>
-        todo.id === id ? { ...todo, isFinished: !todo.isFinished } : todo
-      );
-      return updatedProjects;
-    });
   };
 
   return (
@@ -139,7 +127,12 @@ function App() {
 
           {projects.map((project) =>
             project.id === activeProjectId ? (
-              <ProjectTodos todos={project.todos} />
+              <ProjectTodos
+                key={project.id}
+                todos={project.todos}
+                deleteTodo={deleteTodo}
+                saveEditTodo={saveEditTodo}
+              />
             ) : null
           )}
         </div>

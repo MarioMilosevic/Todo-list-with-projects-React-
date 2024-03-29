@@ -10,6 +10,7 @@ type EditTodoValue = {
 type EditTodoFormType = {
   title: string;
   date: string;
+  isFinished: boolean;
   id: string;
   toggleIsEditing: () => void;
   saveEditTodo: (id: string, updatedTodo: EditTodoValue) => void;
@@ -19,6 +20,7 @@ const EditTodoForm = ({
   title,
   date,
   id,
+  isFinished,
   toggleIsEditing,
   saveEditTodo,
 }: EditTodoFormType) => {
@@ -26,13 +28,13 @@ const EditTodoForm = ({
     title,
     date,
     id,
+    isFinished,
   });
 
   const saveHandler = () => {
-    saveEditTodo(id, editTodoValue)
-    toggleIsEditing()
-  }
-
+    saveEditTodo(id, editTodoValue);
+    toggleIsEditing();
+  };
   return (
     <>
       <div className="w-[70%] mt-4">
@@ -60,6 +62,17 @@ const EditTodoForm = ({
               }
             />
           </div>
+          <input
+            type="checkbox"
+            checked={editTodoValue.isFinished}
+            className="w-4 h-4 text-blue-600 bg-neutral-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            onChange={(e) =>
+              setEditTodoValue((prev) => ({
+                ...prev,
+                isFinished: e.target.checked,
+              }))
+            }
+          />
         </div>
         <div className="flex py-4 gap-4">
           <Button

@@ -18,9 +18,8 @@ const Todo = ({
   date,
   id,
   isFinished,
-  toggleIsTodoFinished,
   deleteTodo,
-  saveEditTodo
+  saveEditTodo,
 }: TodoTypes) => {
   const [isEditing, setIsEditing] = useState(false);
 
@@ -43,14 +42,14 @@ const Todo = ({
           <div className="flex gap-4">
             <Button
               handleClick={toggleIsEditing}
-              hoverColor="bg-green-600"
+              hoverColor="hover:bg-green-600"
               color="bg-green-500"
             >
               Edit
             </Button>
             <Button
               handleClick={() => deleteTodo(id)}
-              hoverColor="bg-red-600"
+              hoverColor="hover:bg-red-600"
               color="bg-red-500"
             >
               Delete
@@ -62,7 +61,7 @@ const Todo = ({
               id="checked-checkbox"
               type="checkbox"
               checked={isFinished}
-              onChange={() => toggleIsTodoFinished(id)}
+              readOnly
               className="w-4 h-4 text-blue-600 bg-neutral-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             />
           </div>
@@ -73,6 +72,7 @@ const Todo = ({
           title={title}
           id={id}
           date={date}
+          isFinished={isFinished}
           toggleIsEditing={toggleIsEditing}
           saveEditTodo={saveEditTodo}
         />
