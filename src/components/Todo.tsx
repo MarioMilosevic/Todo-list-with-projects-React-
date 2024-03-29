@@ -11,6 +11,7 @@ interface TodoTypes {
   id: string;
   toggleIsTodoFinished: (id: string) => void;
   deleteTodo: (id: string) => void;
+  saveEditTodo: (id: string) => void;
 }
 const Todo = ({
   title,
@@ -19,6 +20,7 @@ const Todo = ({
   isFinished,
   toggleIsTodoFinished,
   deleteTodo,
+  saveEditTodo
 }: TodoTypes) => {
   const [isEditing, setIsEditing] = useState(false);
 
@@ -72,6 +74,7 @@ const Todo = ({
           id={id}
           date={date}
           toggleIsEditing={toggleIsEditing}
+          saveEditTodo={saveEditTodo}
         />
       )}
     </>

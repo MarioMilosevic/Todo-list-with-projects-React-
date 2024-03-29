@@ -1,10 +1,18 @@
 import Button from "./Button";
 import { useState } from "react";
+
+type EditTodoValue = {
+  title: string;
+  date: string;
+  id: string;
+};
+
 type EditTodoFormType = {
   title: string;
   date: string;
   id: string;
   toggleIsEditing: () => void;
+  saveEditTodo: (id: string, updatedTodo: EditTodoValue) => void;
 };
 
 const EditTodoForm = ({
@@ -12,6 +20,7 @@ const EditTodoForm = ({
   date,
   id,
   toggleIsEditing,
+  saveEditTodo,
 }: EditTodoFormType) => {
   const [editTodoValue, setEditTodoValue] = useState({
     title,
@@ -19,9 +28,10 @@ const EditTodoForm = ({
     id,
   });
 
-  const cancel = () => {
-    console.log("cancel");
-  };
+  const saveHandler = () => {
+    saveEditTodo(id, editTodoValue)
+    toggleIsEditing()
+  }
 
   return (
     <>
@@ -52,7 +62,11 @@ const EditTodoForm = ({
           </div>
         </div>
         <div className="flex py-4 gap-4">
-          <Button hoverColor={"hover:bg-green-600"} color={"bg-green-500"}>
+          <Button
+            handleClick={saveHandler}
+            hoverColor={"hover:bg-green-600"}
+            color={"bg-green-500"}
+          >
             Save
           </Button>
           <Button

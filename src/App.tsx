@@ -10,6 +10,7 @@ import { projectState } from "./initialState";
 import { todoState } from "./initialState";
 import { useState } from "react";
 import { ProjectState, TodoFormState } from "./types/ResumeTypes";
+import { MdEditNotifications } from "react-icons/md";
 
 function App() {
   const [isProjectEditing, setIsProjectEditing] = useState(false);
@@ -46,8 +47,7 @@ function App() {
     setProjects(filteredProjects);
   };
 
-  const deleteTodo = (id:string) => {
-    console.log(id);
+  const deleteTodo = (id: string) => {
     setProjects((prev) => {
       const updatedProjects = prev.map((project) => {
         if (project.id === activeProjectId) {
@@ -58,6 +58,22 @@ function App() {
       });
       return updatedProjects;
     });
+  };
+
+  const saveEditTodo = (id: string, updatedTodo) => {
+    console.log(id);
+    setProjects((prev) =>
+      prev.map((project) =>
+        project.id === activeProjectId
+          ? {
+              ...project,
+              todos: project.todos.map((todo) =>
+                todo.id === id ? { ...todo, ...updatedTodo } : todo
+              ),
+            }
+          : project
+      )
+    );
   };
 
   const isSelected = (id: string) => {
@@ -127,9 +143,11 @@ function App() {
                   key={todo.id}
                   toggleIsTodoFinished={toggleIsTodoFinished}
                   deleteTodo={deleteTodo}
+                  saveEditTodo={saveEditTodo}
                   {...todo}
                 />
               ))}
+          {/* {projects.map(project => project.id === activeProjectId ? <Project /> : null)} */}
         </div>
       </div>
       <Footer />
