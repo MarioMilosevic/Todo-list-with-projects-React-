@@ -7,9 +7,9 @@ type EditTodoFormType = {
   date: string;
   isFinished: boolean;
   id: string;
-  toggleIsEditing: () => void;
+  // toggleIsEditing: () => void;
   saveEditTodo: (id: string, newTodo: TodoFormState) => void;
-  toggleIsTodoEditing:() => void;
+  toggleIsTodoEditing:(id:string) => void;
 };
 
 const EditTodoForm = ({
@@ -32,7 +32,8 @@ const EditTodoForm = ({
 
   const saveHandler = () => {
     saveEditTodo(id, editTodoValue);
-    toggleIsTodoEditing();
+    toggleIsTodoEditing(id)
+
   };
   return (
     <>
@@ -82,7 +83,7 @@ const EditTodoForm = ({
             Save
           </Button>
           <Button
-            handleClick={() => toggleIsTodoEditing()}
+            handleClick={() => toggleIsTodoEditing(id)}
             hoverColor={"hover:bg-red-600"}
             color={"bg-red-500"}
           >

@@ -12,9 +12,7 @@ const ProjectTodos = ({
   deleteTodo,
   saveEditTodo,
 }: ProjectTodosTypes) => {
-  const toggleIsTodoEditing = () => {
-    console.log("radi");
-  };
+ 
 
   return (
     <>

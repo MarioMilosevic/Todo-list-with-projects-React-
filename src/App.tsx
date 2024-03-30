@@ -58,20 +58,24 @@ function App() {
     });
   };
 
-  const saveEditTodo = (id: string, updatedTodo: TodoFormState) => {
-    setProjects((prev) =>
-      prev.map((project) =>
-        project.id === activeProjectId
-          ? {
-              ...project,
-              todos: project.todos.map((todo) =>
-                todo.id === id ? { ...todo, ...updatedTodo } : todo
-              ),
-            }
-          : project
-      )
-    );
-  };
+const saveEditTodo = (id: string, updatedTodo: TodoFormState) => {
+  setProjects((prev) =>
+    prev.map((project) =>
+      project.id === activeProjectId 
+        ? {
+            ...project,
+            todos: project.todos.map((todo) =>
+              todo.id === id ? { ...todo, ...updatedTodo } : todo
+            ),
+          }
+        : project
+    )
+  );
+
+  console.log(updatedTodo);
+  console.log(projects); 
+};
+
 
   const isSelected = (id: string) => {
     setActiveProjectId(id);
@@ -86,6 +90,21 @@ function App() {
     if (projects.length > 0 && activeProjectId) {
       setIsTodoForm((prev) => !prev);
     }
+  };
+
+  const toggleIsTodoEditing = (id: string) => {
+    setProjects((prev) =>
+      prev.map((project) =>
+        project.id === activeProjectId
+          ? {
+              ...project,
+              todos: project.todos.map((todo) =>
+                todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
+              ),
+            }
+          : project
+      )
+    );
   };
 
   return (
@@ -128,6 +147,9 @@ function App() {
                 isSelected={isSelected}
                 deleteProject={deleteProject}
                 activeProjectId={activeProjectId}
+                saveEditTodo={saveEditTodo}
+                toggleIsTodoEditing={toggleIsTodoEditing}
+                deleteTodo={deleteTodo}
               />
             );
           }

@@ -1,12 +1,16 @@
 import { MdDeleteForever } from "react-icons/md";
 import Todo from "./Todo";
 import { TodoFormState } from "../types/ResumeTypes";
+import EditTodoForm from "./EditTodoForm";
 interface ProjectType {
   title: string;
   id: string;
   isClicked: boolean;
   activeProjectId: string;
   isSelected: (id: string) => void;
+  saveEditTodo: (id: string) => void;
+  deleteTodo: (id: string) => void;
+  toggleIsTodoEditing: (id: string) => void;
   todos: TodoFormState[];
   deleteProject: (
     e: React.MouseEvent<SVGElement, MouseEvent>,
@@ -22,15 +26,18 @@ const Project = ({
   activeProjectId,
   isSelected,
   deleteProject,
+  saveEditTodo,
+  deleteTodo,
+  toggleIsTodoEditing
 }: ProjectType) => {
   const projectClass = isClicked ? "bg-neutral-300" : "bg-neutral-500";
-  console.log(todos);
-  console.log(id);
-  console.log(activeProjectId);
+ 
+
+   
   return (
     <>
-      <div className="flex flex-1">
-        <div className="bg-neutral-500 w-[20%] flex flex-1 flex-col px-4">
+      <div className="flex">
+        <div className="bg-neutral-500 w-[20%] flex flex-1 flex-col px-4 pt-2">
           <div
             className={`${projectClass} flex border w-[80%] px-3 py-2 cursor-pointer rounded-lg mx-auto justify-between items-center text-2xl`}
             onClick={() => isSelected(id)}
@@ -54,10 +61,23 @@ const Project = ({
           </div>
         </div>
         <div className="w-[80%] bg-neutral-300 pl-60 ">
-          <Todo>odje ide neki todo</Todo>
-          <Todo>odje ide neki todo</Todo>
+          {/* {todos.map((todo) =>
+            id === activeProjectId ? (
+              <Todo
+                toggleIsTodoEditing={toggleIsTodoEditing}
+                deleteTodo={deleteTodo}
+                {...todo}
+              />
+            ) : null
+          )} */}
           {todos.map((todo) =>
-            id === activeProjectId ? <Todo {...todo} /> : null
+            id === activeProjectId ? (
+              todo.isEditing ? (
+                <EditTodoForm  key={todo.id} {...todo} saveEditTodo={saveEditTodo} toggleIsTodoEditing={toggleIsTodoEditing}/>
+              ) : (
+                  <Todo key={todo.id} toggleIsTodoEditing={toggleIsTodoEditing} deleteTodo={deleteTodo} {...todo} />
+              )
+            ) : null
           )}
         </div>
       </div>
