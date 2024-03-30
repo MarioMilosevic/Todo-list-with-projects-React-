@@ -37,7 +37,7 @@ const Project = ({
   return (
     <>
       <div className="flex">
-        <div className="bg-neutral-500 w-[20%] flex flex-1 flex-col px-4 pt-2">
+        <div className="bg-neutral-500 w-[20%] flex flex-1 flex-col px-4 pt-2 justify-center">
           <div
             className={`${projectClass} flex border w-[80%] px-3 py-2 cursor-pointer rounded-lg mx-auto justify-between items-center text-2xl`}
             onClick={() => isSelected(id)}
@@ -60,16 +60,7 @@ const Project = ({
             <MdDeleteForever onClick={(e) => deleteProject(e, id)} />
           </div>
         </div>
-        <div className="w-[80%] bg-neutral-300 pl-60 ">
-          {/* {todos.map((todo) =>
-            id === activeProjectId ? (
-              <Todo
-                toggleIsTodoEditing={toggleIsTodoEditing}
-                deleteTodo={deleteTodo}
-                {...todo}
-              />
-            ) : null
-          )} */}
+        <div className="w-[80%] bg-neutral-300 pl-60">
           {todos.map((todo) =>
             id === activeProjectId ? (
               todo.isEditing ? (

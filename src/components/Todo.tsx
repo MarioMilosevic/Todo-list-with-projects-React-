@@ -20,7 +20,7 @@ const Todo = ({
 }: TodoTypes) => {
   return (
     <>
-      <div className="w-[80%] mt-4 p-4 flex justify-between text-xl rounded-lg items-center border border-neutral-500">
+      <div className="w-[80%] mt-4 px-2 flex justify-between text-xl rounded-lg items-center border border-neutral-500">
         <div className="items-center flex gap-4">
           <FaEdit />
           <p>Title:{title}</p>
