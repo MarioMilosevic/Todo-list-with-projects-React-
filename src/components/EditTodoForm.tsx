@@ -6,8 +6,8 @@ type EditTodoFormType = {
   title: string;
   date: string;
   isFinished: boolean;
+  isEditing: boolean;
   id: string;
-  // toggleIsEditing: () => void;
   saveEditTodo: (id: string, newTodo: TodoFormState) => void;
   toggleIsTodoEditing:(id:string) => void;
 };
@@ -18,7 +18,6 @@ const EditTodoForm = ({
   id,
   isFinished,
   isEditing,
-  // toggleIsEditing,
   saveEditTodo,
   toggleIsTodoEditing
 }: EditTodoFormType) => {

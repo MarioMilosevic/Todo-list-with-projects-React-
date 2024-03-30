@@ -5,22 +5,19 @@ interface TodoTypes {
   title: string;
   date: string;
   isFinished: boolean;
-  isEditing:boolean;
+  isEditing: boolean;
   id: string;
   deleteTodo: (id: string) => void;
-  toggleIsTodoEditing:(id:string) => void
+  toggleIsTodoEditing: (id: string) => void;
 }
 const Todo = ({
   title,
   date,
   id,
   isFinished,
-  isEditing,
   deleteTodo,
-  toggleIsTodoEditing
+  toggleIsTodoEditing,
 }: TodoTypes) => {
- 
-
   return (
     <>
       <div className="w-[80%] mt-4 p-4 flex justify-between text-xl rounded-lg items-center border border-neutral-500">
@@ -61,16 +58,6 @@ const Todo = ({
           </div>
         </div>
       </div>
-      {/* {isEditing && (
-        <EditTodoForm
-          title={title}
-          id={id}
-          date={date}
-          isFinished={isFinished}
-          toggleIsEditing={toggleIsEditing}
-          saveEditTodo={saveEditTodo}
-        />
-      )} */}
     </>
   );
 };

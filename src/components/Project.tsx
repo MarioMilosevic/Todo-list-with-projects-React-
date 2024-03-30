@@ -8,7 +8,7 @@ interface ProjectType {
   isClicked: boolean;
   activeProjectId: string;
   isSelected: (id: string) => void;
-  saveEditTodo: (id: string) => void;
+  saveEditTodo: (id: string, updatedTodo: TodoFormState) => void;
   deleteTodo: (id: string) => void;
   toggleIsTodoEditing: (id: string) => void;
   todos: TodoFormState[];

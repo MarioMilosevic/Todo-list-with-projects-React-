@@ -6,7 +6,6 @@ import Project from "./components/Project";
 import AddTodo from "./components/AddTodo";
 import Footer from "./components/Footer";
 import TodoForm from "./components/TodoForm";
-import ProjectTodos from "./components/ProjectTodos";
 import { ProjectState, TodoFormState } from "./types/ResumeTypes";
 
 function App() {
@@ -58,24 +57,20 @@ function App() {
     });
   };
 
-const saveEditTodo = (id: string, updatedTodo: TodoFormState) => {
-  setProjects((prev) =>
-    prev.map((project) =>
-      project.id === activeProjectId 
-        ? {
-            ...project,
-            todos: project.todos.map((todo) =>
-              todo.id === id ? { ...todo, ...updatedTodo } : todo
-            ),
-          }
-        : project
-    )
-  );
-
-  console.log(updatedTodo);
-  console.log(projects); 
-};
-
+  const saveEditTodo = (id: string, updatedTodo: TodoFormState) => {
+    setProjects((prev) =>
+      prev.map((project) =>
+        project.id === activeProjectId
+          ? {
+              ...project,
+              todos: project.todos.map((todo) =>
+                todo.id === id ? { ...todo, ...updatedTodo } : todo
+              ),
+            }
+          : project
+      )
+    );
+  };
 
   const isSelected = (id: string) => {
     setActiveProjectId(id);
@@ -139,7 +134,7 @@ const saveEditTodo = (id: string, updatedTodo: TodoFormState) => {
 
       <div className="flex flex-col bg-gradient-to-r  from-neutral-500 from-20% via-neutral-300 via-20% to-neutral-300 to-100% flex-1">
         {projects.map(
-          (project: { id: string; title: string; isClicked: boolean }) => {
+          (project: { id: string; title: string; isClicked: boolean, todos:TodoFormState[] }) => {
             return (
               <Project
                 key={project.id}
@@ -161,29 +156,4 @@ const saveEditTodo = (id: string, updatedTodo: TodoFormState) => {
 }
 
 export default App;
-{
-  /* {projects.map((project) =>
-            project.id === activeProjectId ? (
-              <ProjectTodos
-                key={project.id}
-                todos={project.todos}
-                deleteTodo={deleteTodo}
-                saveEditTodo={saveEditTodo}
-              />
-            ) : null
-          )} */
-}
 
-{
-  /* {projects.map((project) =>
-            project.id === activeProjectId ? (
-              <Project
-                activeProjectId={activeProjectId}
-                {...project}
-                key={project.id}
-                isSelected={isSelected}
-                deleteProject={deleteProject}
-              />
-            ) : null
-          )} */
-}
