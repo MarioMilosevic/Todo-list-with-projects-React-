@@ -15,6 +15,7 @@ const TodoForm = ({ toggleIsTodoEditing, addTodo, currentDate }: TodoFormTypes) 
       id: "",
       date: currentDate,
       isFinished: false,
+      isEditing:false
   });
 
   const handleAddTodo = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {

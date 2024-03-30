@@ -9,6 +9,7 @@ type EditTodoFormType = {
   id: string;
   toggleIsEditing: () => void;
   saveEditTodo: (id: string, newTodo: TodoFormState) => void;
+  toggleIsTodoEditing:() => void;
 };
 
 const EditTodoForm = ({
@@ -18,6 +19,7 @@ const EditTodoForm = ({
   isFinished,
   toggleIsEditing,
   saveEditTodo,
+  toggleIsTodoEditing
 }: EditTodoFormType) => {
   const [editTodoValue, setEditTodoValue] = useState({
     title,
@@ -28,7 +30,7 @@ const EditTodoForm = ({
 
   const saveHandler = () => {
     saveEditTodo(id, editTodoValue);
-    toggleIsEditing();
+    toggleIsTodoEditing();
   };
   return (
     <>

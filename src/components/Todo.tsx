@@ -9,23 +9,23 @@ interface TodoTypes {
   title: string;
   date: string;
   isFinished: boolean;
+  isEditing:boolean;
   id: string;
   deleteTodo: (id: string) => void;
   saveEditTodo: (id: string, newTodo:TodoFormState) => void;
+  toggleIsTodoEditing:() => void
 }
 const Todo = ({
   title,
   date,
   id,
   isFinished,
+  isEditing,
   deleteTodo,
   saveEditTodo,
+  toggleIsTodoEditing
 }: TodoTypes) => {
-  const [isEditing, setIsEditing] = useState(false);
-
-  const toggleIsEditing = () => {
-    setIsEditing((prev) => !prev);
-  };
+ 
 
   return (
     <>
@@ -41,7 +41,7 @@ const Todo = ({
 
           <div className="flex gap-4">
             <Button
-              handleClick={toggleIsEditing}
+              handleClick={toggleIsTodoEditing}
               hoverColor="hover:bg-green-600"
               color="bg-green-500"
             >

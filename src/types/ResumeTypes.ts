@@ -9,6 +9,7 @@ export type TodoFormState = {
     title: string;
     id: string;
     isFinished: boolean;
+    isEditing: boolean;
     date: string;
 };
 

@@ -13,5 +13,6 @@ export const todoState: TodoFormState = {
   id: "",
   date: "",
   isFinished: false,
+  isEditing:false
 };
 
