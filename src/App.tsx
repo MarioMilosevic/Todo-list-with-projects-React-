@@ -91,8 +91,8 @@ function App() {
   return (
     <>
       <Header />
-      <div className="flex flex-1 h-full">
-        <div className="w-[20%] flex flex-col flex-1 bg-neutral-500">
+      <div className="flex  h-full">
+        <div className="flex flex-col flex-1 bg-neutral-500">
           <h2 className="pt-12 text-center text-4xl font-semibold">Projects</h2>
           {isProjectEditing ? (
             <ProjectForm
@@ -102,32 +102,9 @@ function App() {
           ) : (
             <AddProject toggleIsProjectEditing={toggleIsProjectEditing} />
           )}
-          {/* {projects.map((project) =>
-            project.id === activeProjectId ? (
-              <Project
-                activeProjectId={activeProjectId}
-                {...project}
-                key={project.id}
-                isSelected={isSelected}
-                deleteProject={deleteProject}
-              />
-            ) : null
-          )} */}
-          {projects.map(
-            (project: { id: string; title: string; isClicked: boolean }) => {
-              return (
-                <Project
-                  key={project.id}
-                  {...project}
-                  isSelected={isSelected}
-                  deleteProject={deleteProject}
-                  activeProjectId={activeProjectId}
-                />
-              );
-            }
-          )}
         </div>
-        <div className="bg-neutral-300 w-[80%] pl-60 pt-12 border border-black">
+
+        <div className="bg-neutral-300 w-[80%] pl-60 pt-12">
           <h2 className="text-4xl pl-6 font-semibold">Todos</h2>
           {isTodoForm ? (
             <TodoForm
@@ -139,6 +116,22 @@ function App() {
             <AddTodo toggleIsTodoForm={toggleIsTodoForm} />
           )}
         </div>
+      </div>
+
+      <div className="flex flex-col bg-gradient-to-r  from-neutral-500 from-20% via-neutral-300 via-20% to-neutral-300 to-100% flex-1">
+        {projects.map(
+          (project: { id: string; title: string; isClicked: boolean }) => {
+            return (
+              <Project
+                key={project.id}
+                {...project}
+                isSelected={isSelected}
+                deleteProject={deleteProject}
+                activeProjectId={activeProjectId}
+              />
+            );
+          }
+        )}
       </div>
       <Footer />
     </>
@@ -154,6 +147,20 @@ export default App;
                 todos={project.todos}
                 deleteTodo={deleteTodo}
                 saveEditTodo={saveEditTodo}
+              />
+            ) : null
+          )} */
+}
+
+{
+  /* {projects.map((project) =>
+            project.id === activeProjectId ? (
+              <Project
+                activeProjectId={activeProjectId}
+                {...project}
+                key={project.id}
+                isSelected={isSelected}
+                deleteProject={deleteProject}
               />
             ) : null
           )} */
