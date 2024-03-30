@@ -4,12 +4,12 @@ import { TodoFormState } from "../types/ResumeTypes";
 import { MouseEvent } from "react";
 
 interface TodoFormTypes {
-  toggleIsTodoEditing: () => void;
+  toggleIsTodoForm: () => void;
   addTodo: (newTodo: TodoFormState) => void;
   currentDate:string;
 }
 
-const TodoForm = ({ toggleIsTodoEditing, addTodo, currentDate }: TodoFormTypes) => {
+const TodoForm = ({ toggleIsTodoForm, addTodo, currentDate }: TodoFormTypes) => {
   const [todoForm, setForm] = useState({
       title: "",
       id: "",
@@ -20,7 +20,7 @@ const TodoForm = ({ toggleIsTodoEditing, addTodo, currentDate }: TodoFormTypes) 
 
   const handleAddTodo = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     e.preventDefault();
-    toggleIsTodoEditing();
+    toggleIsTodoForm();
     addTodo(todoForm);
   };
 
@@ -55,7 +55,7 @@ const TodoForm = ({ toggleIsTodoEditing, addTodo, currentDate }: TodoFormTypes) 
           <Button
             hoverColor="hover:bg-red-600"
             color="bg-red-500"
-            handleClick={toggleIsTodoEditing}
+            handleClick={toggleIsTodoForm}
           >
             Cancel
           </Button>

@@ -17,7 +17,8 @@ const EditTodoForm = ({
   date,
   id,
   isFinished,
-  toggleIsEditing,
+  isEditing,
+  // toggleIsEditing,
   saveEditTodo,
   toggleIsTodoEditing
 }: EditTodoFormType) => {
@@ -26,6 +27,7 @@ const EditTodoForm = ({
     date,
     id,
     isFinished,
+    isEditing
   });
 
   const saveHandler = () => {
@@ -80,7 +82,7 @@ const EditTodoForm = ({
             Save
           </Button>
           <Button
-            handleClick={() => toggleIsEditing()}
+            handleClick={() => toggleIsTodoEditing()}
             hoverColor={"hover:bg-red-600"}
             color={"bg-red-500"}
           >

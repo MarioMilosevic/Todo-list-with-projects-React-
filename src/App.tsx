@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Header from "./components/Header";
 import AddProject from "./components/AddProject";
 import ProjectForm from "./components/ProjectForm";
@@ -6,13 +7,12 @@ import AddTodo from "./components/AddTodo";
 import Footer from "./components/Footer";
 import TodoForm from "./components/TodoForm";
 import ProjectTodos from "./components/ProjectTodos";
-import { useState } from "react";
 import { ProjectState, TodoFormState } from "./types/ResumeTypes";
 
 function App() {
   const [isProjectEditing, setIsProjectEditing] = useState(false);
   const [projects, setProjects] = useState<ProjectState[]>([]);
-  const [isTodoEditing, setIsTodoEditing] = useState(false);
+  const [isTodoForm, setIsTodoForm] = useState(false);
   const [activeProjectId, setActiveProjectId] = useState("");
 
   const currentDate = new Date().toISOString().slice(0, 10);
@@ -58,7 +58,7 @@ function App() {
     });
   };
 
-  const saveEditTodo = (id: string, updatedTodo:TodoFormState) => {
+  const saveEditTodo = (id: string, updatedTodo: TodoFormState) => {
     setProjects((prev) =>
       prev.map((project) =>
         project.id === activeProjectId
@@ -82,9 +82,9 @@ function App() {
     setProjects(updatedProjects);
   };
 
-  const toggleIsTodoEditing = () => {
-    if (projects.length > 0 && activeProjectId){
-      setIsTodoEditing((prev) => !prev);
+  const toggleIsTodoForm = () => {
+    if (projects.length > 0 && activeProjectId) {
+      setIsTodoForm((prev) => !prev);
     }
   };
 
@@ -102,6 +102,17 @@ function App() {
           ) : (
             <AddProject toggleIsProjectEditing={toggleIsProjectEditing} />
           )}
+          {/* {projects.map((project) =>
+            project.id === activeProjectId ? (
+              <Project
+                activeProjectId={activeProjectId}
+                {...project}
+                key={project.id}
+                isSelected={isSelected}
+                deleteProject={deleteProject}
+              />
+            ) : null
+          )} */}
           {projects.map(
             (project: { id: string; title: string; isClicked: boolean }) => {
               return (
@@ -110,6 +121,7 @@ function App() {
                   {...project}
                   isSelected={isSelected}
                   deleteProject={deleteProject}
+                  activeProjectId={activeProjectId}
                 />
               );
             }
@@ -117,25 +129,14 @@ function App() {
         </div>
         <div className="bg-neutral-300 w-[80%] pl-60 pt-12 border border-black">
           <h2 className="text-4xl pl-6 font-semibold">Todos</h2>
-          {isTodoEditing ? (
+          {isTodoForm ? (
             <TodoForm
-              toggleIsTodoEditing={toggleIsTodoEditing}
+              toggleIsTodoForm={toggleIsTodoForm}
               addTodo={addTodo}
               currentDate={currentDate}
             />
           ) : (
-            <AddTodo toggleIsTodoEditing={toggleIsTodoEditing} />
-          )}
-
-          {projects.map((project) =>
-            project.id === activeProjectId ? (
-              <ProjectTodos
-                key={project.id}
-                todos={project.todos}
-                deleteTodo={deleteTodo}
-                saveEditTodo={saveEditTodo}
-              />
-            ) : null
+            <AddTodo toggleIsTodoForm={toggleIsTodoForm} />
           )}
         </div>
       </div>
@@ -145,3 +146,15 @@ function App() {
 }
 
 export default App;
+{
+  /* {projects.map((project) =>
+            project.id === activeProjectId ? (
+              <ProjectTodos
+                key={project.id}
+                todos={project.todos}
+                deleteTodo={deleteTodo}
+                saveEditTodo={saveEditTodo}
+              />
+            ) : null
+          )} */
+}

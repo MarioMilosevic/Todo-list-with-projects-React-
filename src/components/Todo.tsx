@@ -1,9 +1,9 @@
 import { FaEdit } from "react-icons/fa";
 import { FaCalendarAlt } from "react-icons/fa";
 import Button from "./Button";
-import EditTodoForm from "./EditTodoForm";
-import { useState } from "react";
-import { TodoFormState } from "../types/ResumeTypes";
+// import EditTodoForm from "./EditTodoForm";
+// import { useState } from "react";
+// import { TodoFormState } from "../types/ResumeTypes";
 
 interface TodoTypes {
   title: string;
@@ -11,8 +11,8 @@ interface TodoTypes {
   isFinished: boolean;
   isEditing:boolean;
   id: string;
+  // saveEditTodo: (id: string, newTodo:TodoFormState) => void;
   deleteTodo: (id: string) => void;
-  saveEditTodo: (id: string, newTodo:TodoFormState) => void;
   toggleIsTodoEditing:() => void
 }
 const Todo = ({
@@ -20,16 +20,14 @@ const Todo = ({
   date,
   id,
   isFinished,
-  isEditing,
   deleteTodo,
-  saveEditTodo,
   toggleIsTodoEditing
 }: TodoTypes) => {
  
 
   return (
     <>
-      <div className="w-[80%] mt-4 p-4 flex justify-between text-xl rounded-lg items-center border border-neutral-500">
+      <div className="w-[80%] mt-4 p-4 flex justify-between text-xl rounded-lg items-center border border-red-500">
         <div className="items-center flex gap-4">
           <FaEdit />
           <p>Title:{title}</p>
@@ -67,7 +65,7 @@ const Todo = ({
           </div>
         </div>
       </div>
-      {isEditing && (
+      {/* {isEditing && (
         <EditTodoForm
           title={title}
           id={id}
@@ -76,7 +74,7 @@ const Todo = ({
           toggleIsEditing={toggleIsEditing}
           saveEditTodo={saveEditTodo}
         />
-      )}
+      )} */}
     </>
   );
 };
